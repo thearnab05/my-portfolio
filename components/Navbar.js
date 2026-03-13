@@ -60,15 +60,17 @@ export default function Navbar() {
       <style jsx>{`
         .navbar {
           position: fixed;
-          top: 1.5rem;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 90%;
-          max-width: 1000px;
-          padding: 1rem 2rem;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 1.5rem 4rem;
           z-index: 2000;
           display: flex;
           justify-content: center;
+          transition: var(--transition);
+          background: rgba(15, 15, 15, 0.8);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--glass-border);
         }
         .nav-content {
           display: flex;
@@ -97,7 +99,7 @@ export default function Navbar() {
           position: fixed;
           top: 0;
           right: 0;
-          width: 500px;
+          width: min(500px, 100%);
           height: 100vh;
           background: rgba(8, 8, 8, 0.98);
           backdrop-filter: blur(40px);
@@ -106,14 +108,14 @@ export default function Navbar() {
           justify-content: center;
           align-items: center;
           gap: 2.5rem;
-          transform: translateX(105%); /* Hidden with small buffer */
-          transition: transform 0.7s cubic-bezier(0.8, 0, 0.1, 1.1); /* Slightly adjusted bezier */
+          transform: translateX(100%); /* Hidden */
+          transition: transform 0.7s cubic-bezier(0.8, 0, 0.1, 1.1);
           z-index: 2050;
           border-left: 3px solid var(--primary);
           box-shadow: -30px 0 60px rgba(0, 0, 0, 0.9);
         }
         .nav-links.active {
-          transform: translateX(0);
+          transform: translateX(0); /* Reveal */
         }
 
         .drawer-inner {

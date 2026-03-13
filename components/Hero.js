@@ -1,6 +1,6 @@
 import TypingText from './TypingText';
 
-export default function Hero() {
+export default function Hero({ onBeginMission }) {
   return (
     <section className="hero container">
       <div className="hero-content">
@@ -16,8 +16,8 @@ export default function Hero() {
           Full Stack Developer & Freelancer crafting premium digital experience
         </p>
         <div className="hero-actions animate-slide-up delay-2">
-          <a href="https://github.com/thearnab05" target="_blank" rel="noopener noreferrer" className="btn-primary">View My Work</a>
-          <a href="https://www.linkedin.com/in/arnab-sural-4b2b48285/" target="_blank" rel="noopener noreferrer" className="btn-secondary">Contact Me</a>
+          <button onClick={onBeginMission} className="btn-primary">BEGIN MISSION</button>
+          <a href="#contact" className="btn-secondary">SEND MESSAGE</a>
         </div>
       </div>
       <style jsx>{`
@@ -29,6 +29,7 @@ export default function Hero() {
           text-align: center;
           padding-top: 80px;
           background: radial-gradient(circle at center, rgba(237, 27, 118, 0.05) 0%, transparent 70%);
+          width: 100%;
         }
         .player-number {
           font-family: var(--font-heading);
@@ -58,11 +59,10 @@ export default function Hero() {
           font-size: 1.1rem;
           opacity: 0.6;
           margin-bottom: 3rem;
-          max-width: 600px;
+          max-width: 800px; /* Increased from 600px */
           margin-left: auto;
           margin-right: auto;
-          border-left: 2px solid var(--primary);
-          padding-left: 1.5rem;
+          padding: 0 1.5rem;
         }
         .hero-actions {
           display: flex;

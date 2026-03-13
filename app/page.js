@@ -2,36 +2,13 @@
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import ProjectCard from '@/components/ProjectCard';
-
-const projects = [
-  {
-    title: "Project: Red Light, Green Light",
-    description: "A high-precision motion detection system designed for elimination-style playground games.",
-    tags: ["Next.js", "AI", "Motion Sensors"],
-    link: "#"
-  },
-  {
-    title: "Protocol: Honeycomb",
-    description: "An intricate pattern-extraction algorithm for delicate high-pressure operations.",
-    tags: ["React", "Custom Hooks", "SVG"],
-    link: "#"
-  },
-  {
-    title: "Structural Integrity: Glass Bridge",
-    description: "A probability-based pathfinding engine with real-time structural analysis.",
-    tags: ["Node.js", "Physics Engine", "Canvas"],
-    link: "#"
-  }
-];
-
+import ProjectDeck from '@/components/ProjectDeck';
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState('idle'); // idle, sending, success
+  const [isMissionStarted, setIsMissionStarted] = useState(false);
 
-  const handleSendMessage = () => {
-    setIsModalOpen(true);
-    setSubmissionStatus('idle');
+  const startMission = () => {
+    setIsMissionStarted(true);
   };
 
   const submitForm = (e) => {
@@ -49,89 +26,71 @@ export default function Home() {
       <div className="green-light-glow"></div>
       <div className="bg-grid"></div>
       <Navbar />
-      <Hero />
+      <Hero onBeginMission={startMission} />
 
-      <section className="selection-section container animate-slide-up delay-2">
-        <div className="selection-grid">
-          <a href="#projects" className="selection-card glass">
-            <div className="selection-symbol">○</div>
-            <h3>PROJECTS</h3>
-            <p>Worker Assignment</p>
-          </a>
-          <a href="#about" className="selection-card glass">
-            <div className="selection-symbol">△</div>
-            <h3>ABOUT</h3>
-            <p>Soldier Protocol</p>
-          </a>
-          <a href="#contact" className="selection-card glass">
-            <div className="selection-symbol">□</div>
-            <h3>CONTACT</h3>
-            <p>Manager Clearance</p>
-          </a>
-        </div>
-      </section>
-
-      {isModalOpen && (
-        <div className="contact-modal-overlay">
-          <div className="contact-card glass mission-card animate-slide-up">
-            {submissionStatus === 'success' ? (
-              <div className="success-state">
-                <h2 className="section-title"><span className="pink-text">QUALIFIED</span></h2>
-                <div className="player-id" style={{ fontSize: '2rem', marginBottom: '1rem' }}>SURAL 456</div>
-                <p>Your data has been transmitted. Wait for the next round.</p>
-                <button className="btn-secondary" style={{ marginTop: '2rem' }} onClick={() => setIsModalOpen(false)}>Return to Base</button>
-              </div>
-            ) : (
-              <>
-                <div className="modal-header">
-                  <div className="symbol">○ △ □</div>
-                  <h2 className="section-title">MISSION <span className="pink-text">BRIEFING</span></h2>
-                </div>
-                <form className="contact-form" onSubmit={submitForm}>
-                  <div className="form-group">
-                    <input type="text" placeholder="PLAYER NAME" required />
-                  </div>
-                  <div className="form-group">
-                    <input type="email" placeholder="ENCRYPTED EMAIL" required />
-                  </div>
-                  <div className="form-group">
-                    <textarea placeholder="SECURE MESSAGE" rows="4" required></textarea>
-                  </div>
-                  <div className="modal-actions">
-                    <button type="submit" className="btn-primary" disabled={submissionStatus === 'sending'}>
-                      <span className="btn-text">
-                        {submissionStatus === 'sending' ? 'TRANSMITTING...' : 'INITIATE CONTACT'}
-                      </span>
-                      <svg className="flight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                      </svg>
-                    </button>
-                    <button type="button" className="btn-secondary" onClick={() => setIsModalOpen(false)}>
-                      <span className="btn-text">ABORT</span>
-                    </button>
-                  </div>
-                </form>
-              </>
-            )}
+      {isMissionStarted && (
+        <section className="selection-section container animate-slide-up">
+          <div className="selection-grid">
+            <a href="#about" className="selection-card glass">
+              <div className="selection-symbol">○</div>
+              <h3>PROFILE</h3>
+              <p>Worker Assignment</p>
+            </a>
+            <a href="#contact" className="selection-card glass">
+              <div className="selection-symbol">△</div>
+              <h3>CONTACT</h3>
+              <p>Soldier Protocol</p>
+            </a>
+            <a href="https://github.com/thearnab05" target="_blank" rel="noopener noreferrer" className="selection-card glass">
+              <div className="selection-symbol">□</div>
+              <h3>CODEBASE</h3>
+              <p>Manager Clearance</p>
+            </a>
           </div>
-        </div>
+        </section>
       )}
 
-
-      <section id="projects" className="projects-section container animate-slide-up delay-3">
-        <h2 className="section-title">Featured <span className="gradient-text">Projects</span></h2>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
-        </div>
-      </section>
+      <ProjectDeck />
 
       <section id="contact" className="contact-section container animate-slide-up">
-        <div className="contact-card glass">
-          <h2 className="section-title">Let's <span className="gradient-text">Connect</span></h2>
-          <p>Interested in working together? Drop me a message!</p>
-          <button className="btn-primary" style={{ marginTop: '2rem' }} onClick={handleSendMessage}>Send Message</button>
+        <div className="contact-card glass mission-card">
+          {submissionStatus === 'success' ? (
+            <div className="success-state">
+              <h2 className="section-title"><span className="pink-text">QUALIFIED</span></h2>
+              <div className="player-id" style={{ fontSize: '2rem', marginBottom: '1rem' }}>SURAL 456</div>
+              <p>Your data has been transmitted. Wait for the next round.</p>
+              <button className="btn-secondary" style={{ marginTop: '2rem' }} onClick={() => setSubmissionStatus('idle')}>New Message</button>
+            </div>
+          ) : (
+            <>
+              <div className="modal-header">
+                <div className="symbol">○ △ □</div>
+                <h2 className="section-title">MISSION <span className="pink-text">BRIEFING</span></h2>
+                <p>Drop a message to initiate contact protocol.</p>
+              </div>
+              <form className="contact-form" onSubmit={submitForm}>
+                <div className="form-group">
+                  <input type="text" placeholder="PLAYER NAME" required />
+                </div>
+                <div className="form-group">
+                  <input type="email" placeholder="ENCRYPTED EMAIL" required />
+                </div>
+                <div className="form-group">
+                  <textarea placeholder="SECURE MESSAGE" rows="4" required></textarea>
+                </div>
+                <div className="modal-actions">
+                  <button type="submit" className="btn-primary" disabled={submissionStatus === 'sending'}>
+                    <span className="btn-text">
+                      {submissionStatus === 'sending' ? 'TRANSMITTING...' : 'SEND MESSAGE'}
+                    </span>
+                    <svg className="flight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </section>
 
@@ -215,7 +174,7 @@ export default function Home() {
           padding: 4rem;
           text-align: center;
           width: 100%;
-          max-width: 800px;
+          max-width: 1200px; /* Increased from 800px */
         }
         .contact-modal-overlay {
           position: fixed;
@@ -233,7 +192,7 @@ export default function Home() {
         }
         .mission-card {
           width: 100%;
-          max-width: 600px;
+          max-width: 800px; /* Increased from 600px */
           border: 2px solid var(--primary);
           background: rgba(10, 10, 10, 0.9);
           padding: 3.5rem;
