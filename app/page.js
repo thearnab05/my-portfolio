@@ -6,6 +6,7 @@ import ProjectDeck from '@/components/ProjectDeck';
 export default function Home() {
   const [submissionStatus, setSubmissionStatus] = useState('idle'); // idle, sending, success
   const [isMissionStarted, setIsMissionStarted] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const startMission = () => {
     setIsMissionStarted(true);
@@ -31,12 +32,22 @@ export default function Home() {
       {isMissionStarted && (
         <section className="selection-section container animate-slide-up">
           <div className="selection-grid">
-            <a href="#about" className="selection-card glass">
-              <div className="selection-symbol">○</div>
-              <h3>PROFILE</h3>
-              <p>Worker Assignment</p>
-            </a>
-            <a href="#contact" className="selection-card glass">
+            <div
+              className={`selection-card glass profile-wrap ${isProfileOpen ? 'profile-active' : ''}`}
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
+            >
+              <div className="card-main-content">
+                <div className="selection-symbol">○</div>
+                <h3>PROFILE</h3>
+                <p>Worker Assignment</p>
+              </div>
+              <div className={`profile-submenu ${isProfileOpen ? 'open' : ''}`}>
+                <a href="https://www.linkedin.com/in/arnab-sural-4b2b48285/" target="_blank" rel="noopener noreferrer" className="social-pill" onClick={(e) => e.stopPropagation()}>LinkedIn</a>
+                <a href="https://www.instagram.com/3he.arnab/" target="_blank" rel="noopener noreferrer" className="social-pill" onClick={(e) => e.stopPropagation()}>Instagram</a>
+                <a href="https://m.facebook.com/arnaba.surala/" target="_blank" rel="noopener noreferrer" className="social-pill" onClick={(e) => e.stopPropagation()}>Facebook</a>
+              </div>
+            </div>
+            <a href="#contact" className="selection-card glass transition-link">
               <div className="selection-symbol">△</div>
               <h3>CONTACT</h3>
               <p>Soldier Protocol</p>
@@ -56,10 +67,33 @@ export default function Home() {
         <div className="contact-card glass mission-card">
           {submissionStatus === 'success' ? (
             <div className="success-state">
-              <h2 className="section-title"><span className="pink-text">QUALIFIED</span></h2>
-              <div className="player-id" style={{ fontSize: '2rem', marginBottom: '1rem' }}>SURAL 456</div>
-              <p>Your data has been transmitted. Wait for the next round.</p>
+              <div className="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h2 className="section-title"><span className="pink-text">DELIVERED</span></h2>
+              <div className="player-id" style={{ fontSize: '1.5rem', marginBottom: '1rem', opacity: 0.8 }}>MESSAGE SECURED</div>
+              <p>Your data has been transmitted successfully.</p>
               <button className="btn-secondary" style={{ marginTop: '2rem' }} onClick={() => setSubmissionStatus('idle')}>New Message</button>
+            </div>
+          ) : submissionStatus === 'sending' ? (
+            <div className="sending-state">
+              <h2 className="section-title">DISPATCHING <span className="pink-text">COURIER</span></h2>
+              <div className="animation-container">
+                <svg className="delivery-path" viewBox="0 0 400 100" preserveAspectRatio="none">
+                  <path id="curve" d="M0,50 Q200,-50 400,50" fill="transparent" stroke="rgba(237, 27, 118, 0.3)" strokeWidth="3" strokeDasharray="10 10" />
+                </svg>
+                <div className="bicycle-wrapper">
+                  <svg className="bicycle-icon" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                    <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                    <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-3 4-3 2 3h2"></path>
+                  </svg>
+                </div>
+              </div>
+              <p className="pulse-text">Navigating secure channels...</p>
             </div>
           ) : (
             <>
@@ -79,6 +113,9 @@ export default function Home() {
                   <textarea placeholder="SECURE MESSAGE" rows="4" required></textarea>
                 </div>
                 <div className="modal-actions">
+                  <button type="reset" className="btn-secondary btn-abort">
+                    ABORT
+                  </button>
                   <button type="submit" className="btn-primary" disabled={submissionStatus === 'sending'}>
                     <span className="btn-text">
                       {submissionStatus === 'sending' ? 'TRANSMITTING...' : 'SEND MESSAGE'}
@@ -119,8 +156,12 @@ export default function Home() {
           border: 1px solid var(--glass-border);
           position: relative;
           overflow: hidden;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
-        .selection-card:hover {
+        .selection-card:hover, .profile-active {
           background: rgba(237, 27, 118, 0.05);
           border-color: var(--primary);
           transform: translateY(-10px);
@@ -133,9 +174,59 @@ export default function Home() {
           margin-bottom: 1.5rem;
           transition: var(--transition);
         }
-        .selection-card:hover .selection-symbol {
+        .selection-card:hover .selection-symbol, .profile-active .selection-symbol {
           color: var(--primary);
           transform: scale(1.1) rotate(15deg);
+        }
+        .profile-wrap {
+          padding: 0;
+        }
+        .card-main-content {
+          padding: 4rem 2rem;
+          transition: 0.4s;
+        }
+        .profile-active .card-main-content {
+          transform: translateY(-20px);
+          opacity: 0;
+          pointer-events: none;
+        }
+        .profile-submenu {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          opacity: 0;
+          transform: translateY(20px);
+          pointer-events: none;
+          transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-submenu.open {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: all;
+        }
+        .social-pill {
+          padding: 0.8rem 2rem;
+          background: rgba(237, 27, 118, 0.1);
+          border: 1px solid var(--primary);
+          color: white;
+          font-family: var(--font-heading);
+          letter-spacing: 2px;
+          font-size: 0.9rem;
+          width: 70%;
+          transition: 0.3s;
+          clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        .social-pill:hover {
+          background: var(--primary);
+          transform: scale(1.05);
+          box-shadow: 0 0 15px rgba(237, 27, 118, 0.4);
         }
         .selection-card h3 {
           font-family: var(--font-heading);
@@ -306,10 +397,125 @@ export default function Home() {
           40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
+        .btn-abort {
+          border-left-color: #e74c3c !important;
+          color: #e74c3c;
+        }
+        
+        .btn-abort:hover {
+          background: #e74c3c !important;
+          color: #fff;
+          animation: abortShake 0.3s cubic-bezier(.36,.07,.19,.97) infinite both !important;
+          box-shadow: 0 0 20px rgba(231, 76, 60, 0.6) !important;
+        }
+
+        @keyframes abortShake {
+          0% { transform: translate(1px, 1px) rotate(0deg); }
+          10% { transform: translate(-1px, -2px) rotate(-1deg); }
+          20% { transform: translate(-2px, 0px) rotate(1deg); }
+          30% { transform: translate(2px, 2px) rotate(0deg); }
+          40% { transform: translate(1px, -1px) rotate(1deg); }
+          50% { transform: translate(-1px, 2px) rotate(-1deg); }
+          60% { transform: translate(-2px, 1px) rotate(0deg); }
+          70% { transform: translate(2px, 1px) rotate(-1deg); }
+          80% { transform: translate(-1px, -1px) rotate(1deg); }
+          90% { transform: translate(1px, 2px) rotate(0deg); }
+          100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
         .success-state {
           text-align: center;
           animation: fadeIn 0.5s ease-out;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
+
+        .success-icon {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 1.5rem;
+          color: var(--primary);
+          animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleUp {
+          from { transform: scale(0); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+
+        .sending-state {
+          text-align: center;
+          padding: 2rem 0;
+          animation: fadeIn 0.3s ease-out;
+        }
+
+        .animation-container {
+          position: relative;
+          width: 100%;
+          height: 120px;
+          margin: 2rem 0;
+          overflow: hidden;
+        }
+
+        .delivery-path {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .bicycle-wrapper {
+          position: absolute;
+          top: 0;
+          left: -40px; /* Start offscreen */
+          width: 40px;
+          height: 40px;
+          offset-path: path("M0,50 Q400,-50 800,50"); /* Larger path relative to container */
+          animation: rideSequence 2s linear forwards;
+        }
+
+        .bicycle-icon {
+          width: 100%;
+          height: 100%;
+          animation: bounceCycle 0.3s infinite alternate ease-in-out;
+        }
+
+        .pulse-text {
+          font-family: var(--font-heading);
+          letter-spacing: 2px;
+          opacity: 0.7;
+          animation: pulseOpacity 1s infinite alternate;
+        }
+
+        @keyframes rideSequence {
+          0% { 
+            offset-distance: 0%; 
+            transform: scaleX(1);
+          }
+          100% { 
+            offset-distance: 100%; 
+            transform: scaleX(1);
+          }
+        }
+
+        @keyframes bounceCycle {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-4px); }
+        }
+
+        @keyframes pulseOpacity {
+          from { opacity: 0.4; }
+          to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+          .bicycle-wrapper {
+            offset-path: path("M0,50 Q200,-50 400,50");
+          }
+        }
+
         .footer {
           padding: 6rem 2rem;
           text-align: center;

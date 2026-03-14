@@ -3,51 +3,51 @@ import { useState } from 'react';
 
 const projects = [
   {
-    title: "Protocol: Red Light",
-    description: "AI-powered motion detection system with elimination-style logic.",
-    image: "https://img.freepik.com/free-vector/digital-futuristic-background_23-2148810370.jpg?w=1200",
+    title: "Library Management System",
+    description: "Digital catalog and automated issuing system for modern libraries.",
+    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "Pattern: Honeycomb",
-    description: "Pattern extraction algorithm for high-pressure delicate operations.",
-    image: "https://img.freepik.com/free-vector/geometric-background-design_52683-43183.jpg?w=1200",
+    title: "Money Manager",
+    description: "Personal finance tracker with intuitive visualizations and budgets.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "Engine: Glass Bridge",
-    description: "Pathfinding engine with real-time structural probability analysis.",
-    image: "https://img.freepik.com/free-vector/abstract-digital-background_23-2148810368.jpg?w=1200",
+    title: "Event Management System",
+    description: "Comprehensive dashboard for planning and hosting secure events.",
+    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "System: Umbrella",
-    description: "Secure communication protocol for field agents and managers.",
-    image: "https://img.freepik.com/free-vector/abstract-technological-background_23-2148810372.jpg?w=1200",
+    title: "Movie Seat Booking Overview",
+    description: "Interactive UI for selecting and reserving theater seats in real-time.",
+    image: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "Operation: Marble",
-    description: "Decentralized trade and valuation engine for high-stakes assets.",
-    image: "https://img.freepik.com/free-vector/futuristic-technology-background_23-2148416439.jpg?w=1200",
+    title: "Recipe Finder",
+    description: "Smart culinary engine with ingredient-based search algorithms.",
+    image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "Network: Tug of War",
-    description: "Distributed load balancer for maximizing system throughput.",
-    image: "https://img.freepik.com/free-vector/abstract-binary-code-background_23-2148351501.jpg?w=1200",
+    title: "Weather Report Perfect",
+    description: "High-accuracy meteorological dashboard with location tracking.",
+    image: "https://images.unsplash.com/photo-1504608524841-42ce6c1410f3?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   },
   {
-    title: "Interface: Final Round",
-    description: "High-adrenaline dashboard for monitoring mission progress.",
-    image: "https://img.freepik.com/free-vector/glowing-digital-technology-background_23-2148386377.jpg?w=1200",
+    title: "Food Delivery System Overview",
+    description: "End-to-end platform for real-time food ordering and tracking.",
+    image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=1200&auto=format&fit=crop",
     live: "#",
     details: "https://github.com/thearnab05"
   }
@@ -61,47 +61,48 @@ export default function ProjectDeck() {
       <h2 className="section-title">MISSION <span className="pink-text">RECORDS</span></h2>
       <div className="deck-container">
         <div className={`cards-stack ${hoveredIndex !== null ? 'is-hovering' : ''}`}>
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className={`project-card-wrapper ${hoveredIndex === index ? 'active' : ''} ${hoveredIndex !== null && hoveredIndex !== index ? 'inactive' : ''}`}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              style={{
-                '--index': index,
-                '--total': projects.length,
-                '--rotate': `${(index - (projects.length - 1) / 2) * 5}deg`,
-                '--translate-x': `${(index - (projects.length - 1) / 2) * 40}px`,
-                '--translate-y': `${Math.abs(index - (projects.length - 1) / 2) * 10}px`
-              }}
-            >
-              <div className="project-card-inner">
-                <div className="card-face card-front">
-                  <div className="card-image" style={{ backgroundImage: `url(${project.image})` }}>
-                    <div className="card-symbol">○ △ □</div>
-                  </div>
-                  <div className="card-info">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                  </div>
-                </div>
+          {projects.map((project, index) => {
+            const offset = index - (projects.length - 1) / 2;
 
-                <div className="card-overlay">
-                  <div className="overlay-content">
-                    <div className="preview-mini" style={{ backgroundImage: `url(${project.image})` }}></div>
-                    <div className="overlay-actions">
-                      <a href={project.live} target="_blank" rel="noopener noreferrer" className="action-btn live">
-                        VIEW LIVE
-                      </a>
-                      <a href={project.details} target="_blank" rel="noopener noreferrer" className="action-btn details">
-                        DETAILS
-                      </a>
+            return (
+              <div
+                key={index}
+                className={`project-card-wrapper ${hoveredIndex === index ? 'active' : ''} ${hoveredIndex !== null && hoveredIndex !== index ? 'inactive' : ''}`}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                style={{
+                  '--index': index,
+                  '--offset': offset
+                }}
+              >
+                <div className="project-card-inner">
+                  <div className="card-face card-front">
+                    <div className="card-image" style={{ backgroundImage: `url(${project.image})` }}>
+                      <div className="card-symbol">○ △ □</div>
+                    </div>
+                    <div className="card-info">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="card-overlay">
+                    <div className="overlay-content">
+                      <div className="preview-mini" style={{ backgroundImage: `url(${project.image})` }}></div>
+                      <div className="overlay-actions">
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="action-btn live">
+                          VIEW LIVE
+                        </a>
+                        <a href={project.details} target="_blank" rel="noopener noreferrer" className="action-btn details">
+                          DETAILS
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -136,36 +137,20 @@ export default function ProjectDeck() {
           height: 100%;
           top: 0;
           left: 0;
-          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-          transform: 
-            translateX(var(--translate-x)) 
-            translateY(var(--translate-y)) 
-            rotate(var(--rotate));
+          transform-origin: center 200%; /* Pivot point far below creates the perfect arc */
+          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          transform: rotate(calc(var(--offset) * 3deg)); /* Tight fan unhovered */
           z-index: var(--index);
           cursor: pointer;
         }
 
         /* Deck spreading on container hover */
         .is-hovering .project-card-wrapper {
-          transform: 
-            translateX(calc((var(--index) - (var(--total) - 1) / 2) * 120px)) 
-            translateY(calc(Math.abs(var(--index) - (var(--total) - 1) / 2) * 30px)) 
-            rotate(calc((var(--index) - (var(--total) - 1) / 2) * 15deg))
-            scale(0.9);
-          opacity: 0.6;
+          transform: rotate(calc(var(--offset) * 8deg)); /* Wide perfect arc fan */
         }
 
-        /* Active card pop-up */
         .project-card-wrapper.active {
-          transform: translateY(-80px) scale(1.15) rotate(0deg) !important;
-          z-index: 100;
-          opacity: 1 !important;
-          box-shadow: 0 30px 60px rgba(237, 27, 118, 0.4);
-        }
-
-        .project-card-wrapper.inactive {
-           filter: blur(2px);
-           opacity: 0.3 !important;
+           z-index: 100 !important;
         }
         
         .project-card-inner {
@@ -177,6 +162,18 @@ export default function ProjectDeck() {
           border: 1px solid rgba(255,255,255,0.1);
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* The actual popup translation is relative to the card's local rotated axis! */
+        .project-card-wrapper.active .project-card-inner {
+          transform: translateY(-60px) scale(1.1);
+          box-shadow: 0 30px 60px rgba(237, 27, 118, 0.6);
+        }
+
+        .project-card-wrapper.inactive .project-card-inner {
+           filter: opacity(0.5) blur(3px);
+           transform: translateY(15px) scale(0.95);
         }
 
         .card-face {
@@ -301,13 +298,17 @@ export default function ProjectDeck() {
               min-height: 400px;
            }
            .cards-stack {
-              width: 260px;
-              height: 380px;
+              width: 200px;
+              height: 280px;
+           }
+           .project-card-wrapper {
+              transform-origin: center 250%;
            }
            .is-hovering .project-card-wrapper {
-              transform: 
-                translateX(calc((var(--index) - (var(--total) - 1) / 2) * 70px)) 
-                scale(0.8);
+              transform: rotate(calc(var(--offset) * 5deg));
+           }
+           .project-card-wrapper.active .project-card-inner {
+              transform: translateY(-40px) scale(1.05);
            }
            .section-title {
               font-size: 2rem;
