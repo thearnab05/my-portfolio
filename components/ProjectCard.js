@@ -1,17 +1,17 @@
 export default function ProjectCard({ title, description, tags, link }) {
-    return (
-        <div className="project-card glass">
-            <div className="card-image"></div>
-            <div className="card-content">
-                <h3 className="card-title">{title}</h3>
-                <p className="card-description">{description}</p>
-                <div className="card-tags">
-                    {tags.map((tag, i) => (
-                        <span key={i} className="tag">{tag}</span>
-                    ))}
-                </div>
-            </div>
-            <style jsx>{`
+  return (
+    <div className="project-card glass">
+      <div className="card-image"></div>
+      <div className="card-content">
+        <h3 className="card-title">{title}</h3>
+        <p className="card-description">{description}</p>
+        <div className="card-tags">
+          {tags.map((tag, i) => (
+            <span key={i} className="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+      <style jsx>{`
         .project-card {
           overflow: hidden;
           transition: var(--transition);
@@ -25,7 +25,7 @@ export default function ProjectCard({ title, description, tags, link }) {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         .card-image {
-          height: 200px;
+          height: 201px;
           background: linear-gradient(135deg, var(--accent), #1a1a1e);
           position: relative;
         }
@@ -60,6 +60,6 @@ export default function ProjectCard({ title, description, tags, link }) {
           font-weight: 600;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
