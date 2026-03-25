@@ -50,3 +50,7 @@ export default function TypingText({ texts, speed = 100, pause = 2000 }) {
         </span>
     );
 }
+
+
+
+//34e rtvcee
