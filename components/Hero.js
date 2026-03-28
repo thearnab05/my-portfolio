@@ -47,7 +47,7 @@ export default function Hero({ onBeginMission }) {
         }
         .pink-text {
           color: var(--primary);
-          shadow: 2px 2px 2px red;  //dued
+          text-shadow: 2px 2px 2px red; /* dued */
         }
         .roles-typing {
           font-size: 0.4em;
