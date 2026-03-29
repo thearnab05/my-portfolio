@@ -20,6 +20,7 @@ export default function Home() {
     }, 2000);
   };
 
+
   return (
     <main className="main-wrapper">
       <div className="squid-bg"></div>

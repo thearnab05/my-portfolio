@@ -17,6 +17,10 @@ export default function Hero({ onBeginMission }) {
         </p>
         <div className="hero-actions animate-slide-up delay-2">
           <button onClick={onBeginMission} className="btn-primary">BEGIN MISSION</button>
+          <a href="/ARNAB-CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-loadout">
+            <span className="loadout-text">LOAD OUT</span>
+            <span className="cv-text">CV</span>
+          </a>
           <a href="#contact" className="btn-secondary">SEND MESSAGE</a>
         </div>
       </div>
@@ -69,6 +73,44 @@ export default function Hero({ onBeginMission }) {
           display: flex;
           gap: 1.5rem;
           justify-content: center;
+        }
+        .btn-loadout {
+          padding: 0.8rem 2rem;
+          background: rgba(237, 27, 118, 0.1);
+          border: 1px solid var(--primary);
+          border-radius: 8px;
+          color: var(--primary);
+          font-weight: 800;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          width: 160px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-loadout:hover {
+          background: var(--primary);
+          box-shadow: 0 0 25px rgba(237, 27, 118, 0.6);
+        }
+        .loadout-text {
+          position: absolute;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .cv-text {
+          position: absolute;
+          transform: translateY(150%);
+          color: #fff;
+          font-weight: 800;
+          letter-spacing: 4px;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-loadout:hover .loadout-text {
+          transform: translateY(-150%);
+        }
+        .btn-loadout:hover .cv-text {
+          transform: translateY(0);
         }
         .btn-secondary {
           padding: 0.8rem 2rem;
