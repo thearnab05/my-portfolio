@@ -21,7 +21,7 @@ export default function Navbar() {
 
             <div className="drawer-content">
               <div className="drawer-profile">
-                <img src="/player-456.png" alt="Player 456" className="profile-img" />
+                <img src="/cyberpunk-profile.jpg" alt="Player 456" className="profile-img" />
                 <span className="player-id">SURAL 456</span>
               </div>
 
