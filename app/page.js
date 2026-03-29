@@ -23,9 +23,10 @@ export default function Home() {
 
   return (
     <main className="main-wrapper">
-      <div className="squid-bg"></div>
+      <div className="cyberpunk-bg"></div>
+      <div className="space-stars"></div>
       <div className="noise-overlay"></div>
-      <div className="green-light-glow"></div>
+      <div className="neon-glow"></div>
       <div className="bg-grid"></div>
       <Navbar />
       <Hero onBeginMission={startMission} />
