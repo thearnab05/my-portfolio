@@ -12,12 +12,45 @@ export default function Home() {
     setIsMissionStarted(true);
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     setSubmissionStatus('sending');
-    setTimeout(() => {
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/suralarnab28@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          _subject: `New Transmission from ${data.name}`,
+          _template: "box"
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit");
+      }
+
       setSubmissionStatus('success');
-    }, 2000);
+      e.target.reset();
+    } catch (error) {
+      console.error(error);
+      setSubmissionStatus('idle');
+      if (error.message.includes("activate")) {
+        alert("The site owner needs to verify their email address. Please check your inbox for an activation email.");
+      } else {
+        alert("Transmission failed. Please verify connection and try again.");
+      }
+    }
   };
 
 
@@ -106,13 +139,13 @@ export default function Home() {
               </div>
               <form className="contact-form" onSubmit={submitForm}>
                 <div className="form-group">
-                  <input type="text" placeholder="PLAYER NAME" required />
+                  <input name="name" type="text" placeholder="PLAYER NAME" required />
                 </div>
                 <div className="form-group">
-                  <input type="email" placeholder="ENCRYPTED EMAIL" required />
+                  <input name="email" type="email" placeholder="ENCRYPTED EMAIL" required />
                 </div>
                 <div className="form-group">
-                  <textarea placeholder="SECURE MESSAGE" rows="4" required></textarea>
+                  <textarea name="message" placeholder="SECURE MESSAGE" rows="4" required></textarea>
                 </div>
                 <div className="modal-actions">
                   <button type="reset" className="btn-secondary btn-abort">
