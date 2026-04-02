@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProjectDeck from '@/components/ProjectDeck';
+
 export default function Home() {
   const [submissionStatus, setSubmissionStatus] = useState('idle'); // idle, sending, success
   const [isMissionStarted, setIsMissionStarted] = useState(false);

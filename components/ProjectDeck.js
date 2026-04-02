@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import UnderConstructionModal from './UnderConstructionModal';
 
 const projects = [
   {
@@ -55,6 +56,8 @@ const projects = [
 
 export default function ProjectDeck() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   return (
     <section className="deck-section container">
@@ -90,7 +93,18 @@ export default function ProjectDeck() {
                     <div className="overlay-content">
                       <div className="preview-mini" style={{ backgroundImage: `url(${project.image})` }}></div>
                       <div className="overlay-actions">
-                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="action-btn live">
+                        <a 
+                          href={project.live} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="action-btn live"
+                          onClick={(e) => {
+                            if (project.live === "#" || !project.live) {
+                              e.preventDefault();
+                              setIsModalOpen(true);
+                            }
+                          }}
+                        >
                           VIEW LIVE
                         </a>
                         <a href={project.details} target="_blank" rel="noopener noreferrer" className="action-btn details">
@@ -316,6 +330,7 @@ export default function ProjectDeck() {
            }
         }
       `}</style>
+      <UnderConstructionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
