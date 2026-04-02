@@ -1,4 +1,5 @@
 import TypingText from './TypingText';
+import { sounds } from '@/lib/sounds';
 
 export default function Hero({ onBeginMission }) {
   return (
@@ -17,7 +18,7 @@ export default function Hero({ onBeginMission }) {
         </p>
         <div className="hero-actions animate-slide-up delay-2">
           <button onClick={onBeginMission} className="btn-primary">BEGIN MISSION</button>
-          <a href="/ARNAB-CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-loadout">
+          <a href="/ARNAB-CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-loadout" onClick={() => sounds?.playLoadout()}>
             <span className="loadout-text">LOAD OUT</span>
             <span className="cv-text">CV</span>
           </a>

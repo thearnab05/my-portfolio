@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProjectDeck from '@/components/ProjectDeck';
+import { sounds } from '@/lib/sounds';
 
 export default function Home() {
   const [submissionStatus, setSubmissionStatus] = useState('idle'); // idle, sending, success
@@ -10,11 +11,13 @@ export default function Home() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const startMission = () => {
+    sounds?.playBeginMission();
     setIsMissionStarted(true);
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
+    sounds?.playSendMessage();
     setSubmissionStatus('sending');
     
     const formData = new FormData(e.target);
