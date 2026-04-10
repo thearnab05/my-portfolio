@@ -39,10 +39,10 @@ export default function Hero({ onBeginMission }) {
             <span className="tech-label">TECH STACK</span>
             <div className="tech-pills">
               <span className="tech-pill">React</span>
-              <span className="tech-pill">Node.js</span>
+              <span className="tech-pill">Next.js</span>
               <span className="tech-pill">MongoDB</span>
               <span className="tech-pill">Express</span>
-              <span className="tech-pill">TailwindCSS</span>
+              <span className="tech-pill">Word Press</span>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function Hero({ onBeginMission }) {
       </div>
 
       <div className="right-middle-scroll animate-fade-in delay-3">
-        <span className="scroll-text">S C R O L L</span>
+        <span className="scroll-text">S U R A L  W O R L D</span>
         <div className="scroll-line"><div className="scroll-dot"></div></div>
       </div>
 
