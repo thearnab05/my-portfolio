@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProjectDeck from '@/components/ProjectDeck';
+import ScrollIndicator from '@/components/ScrollIndicator';
 import { sounds } from '@/lib/sounds';
 
 export default function Home() {
@@ -19,14 +20,14 @@ export default function Home() {
     e.preventDefault();
     sounds?.playSendMessage();
     setSubmissionStatus('sending');
-    
+
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/suralarnab28@gmail.com", {
         method: "POST",
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
@@ -66,6 +67,7 @@ export default function Home() {
       <div className="neon-glow"></div>
       <div className="bg-grid"></div>
       <Navbar />
+      <ScrollIndicator />
       <Hero onBeginMission={startMission} />
 
       {isMissionStarted && (

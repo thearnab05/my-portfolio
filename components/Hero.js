@@ -125,11 +125,6 @@ export default function Hero({ onBeginMission }) {
         </div>
       </div>
 
-      <div className="right-middle-scroll animate-fade-in delay-3">
-        <span className="scroll-text">S U R A L  W O R L D</span>
-        <div className="scroll-line"><div className="scroll-dot"></div></div>
-      </div>
-
       <style jsx>{`
         .hero-section {
           min-height: 100vh;
@@ -541,52 +536,6 @@ export default function Hero({ onBeginMission }) {
           transform: translateY(-2px);
         }
 
-        .right-middle-scroll {
-          position: absolute;
-          right: 3rem;
-          top: 50%;
-          transform: translateY(-50%);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-          z-index: 10;
-        }
-
-        .scroll-text {
-          writing-mode: vertical-rl;
-          font-size: 0.55rem;
-          font-weight: 800;
-          letter-spacing: 4px;
-          color: rgba(255,255,255,0.5);
-        }
-
-        .scroll-line {
-          width: 1px;
-          height: 80px;
-          background: rgba(255,255,255,0.1);
-          position: relative;
-        }
-
-        .scroll-dot {
-          width: 5px;
-          height: 5px;
-          background: var(--primary);
-          border-radius: 50%;
-          position: absolute;
-          left: -2px;
-          top: 0;
-          box-shadow: 0 0 10px var(--primary);
-          animation: scrollDownDot 2s cubic-bezier(0.1, 0.5, 0.5, 1) infinite;
-        }
-
-        @keyframes scrollDownDot {
-          0% { top: 0; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
-        }
-
         @media (max-width: 1024px) {
            .hero-container { grid-template-columns: 1fr; padding: 2rem; }
            .hero-content { margin-top: 2rem; }
@@ -595,7 +544,6 @@ export default function Hero({ onBeginMission }) {
            .hero-bottom-stats { width: 95%; flex-wrap: wrap; justify-content: center; gap: 2rem; bottom: 120px; }
            .bottom-left-corner { left: 2rem; bottom: 20px; }
            .bottom-right-corner { right: 2rem; bottom: 20px; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
-           .right-middle-scroll { display: none; }
         }
         @media (max-width: 768px) {
             .hero-title { font-size: 3rem; }
