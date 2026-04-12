@@ -2,29 +2,29 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 export default function ScrollIndicator() {
-    const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll();
 
-    // Smooth physics-based spring for the scroll
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
+  // Smooth physics-based spring for the scroll
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-    // Transform scroll progress from 0 to 1 into y position (0px to 75px)
-    const dotY = useTransform(smoothProgress, [0, 1], [0, 75]);
+  // Transform scroll progress from 0 to 1 into y position (0px to 75px)
+  const dotY = useTransform(smoothProgress, [0, 1], [0, 75]);
 
-    return (
-        <div className="scroll-indicator-container">
-            <span className="scroll-text">S U R A L  W O R L D</span>
-            <div className="scroll-line">
-                <motion.div
-                    className="scroll-dot"
-                    style={{ y: dotY, top: 0 }}
-                />
-            </div>
+  return (
+    <div className="scroll-indicator-container">
+      <span className="scroll-text">S U R A L'S  W O R L D</span>
+      <div className="scroll-line">
+        <motion.div
+          className="scroll-dot"
+          style={{ y: dotY, top: 0 }}
+        />
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
         .scroll-indicator-container {
           position: fixed;
           right: 3rem;
@@ -66,6 +66,6 @@ export default function ScrollIndicator() {
            .scroll-indicator-container { display: none; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
