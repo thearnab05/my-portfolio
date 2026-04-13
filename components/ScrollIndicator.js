@@ -6,7 +6,7 @@ export default function ScrollIndicator() {
 
   // Smooth physics-based spring for the scroll
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
+    stiffness: 500,
     damping: 30,
     restDelta: 0.001
   });
