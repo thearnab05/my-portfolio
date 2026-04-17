@@ -107,7 +107,7 @@ export default function Hero({ onBeginMission }) {
 
       {/* Corner Overlays */}
       <div className="bottom-left-corner animate-fade-in delay-3">
-        <div className="avatar-n">N</div>
+        <div className="avatar-n">AS--01</div>
         <div className="corner-text">
           <span className="gray-text">LET'S BUILD SOMETHING</span>
           <br />
