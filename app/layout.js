@@ -25,3 +25,9 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
+
+
+
+//MAKING IT MOBILE COMPETETIVE
