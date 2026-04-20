@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Arnab Sural | Portfolio",
   description: "A premium portfolio showcasing the work of Arnab Sural, a Full Stack Developer.",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }) {
