@@ -229,6 +229,7 @@ export default function Hero({ onBeginMission }) {
           display: flex;
           gap: 1rem;
           margin-bottom: 3rem;
+          flex-wrap: wrap;
         }
 
         /* Buttons Styling to Match Mockup */
@@ -546,10 +547,13 @@ export default function Hero({ onBeginMission }) {
            .bottom-right-corner { right: 2rem; bottom: 20px; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
         }
         @media (max-width: 768px) {
-            .hero-title { font-size: 3rem; }
+            .hero-title { font-size: 2.5rem; }
             .bottom-left-corner, .bottom-right-corner { display: none; }
-            .hero-bottom-stats { position: relative; bottom: auto; margin-top: 4rem; pb: 4rem; border-top: none; }
+            .hero-bottom-stats { position: relative; bottom: auto; margin-top: 4rem; padding-bottom: 4rem; border-top: none; }
             .hero-section { height: auto; padding-bottom: 4rem; }
+            .hero-content { align-items: center; text-align: center; }
+            .tech-pills { justify-content: center; }
+            .hero-actions { justify-content: center; }
         }
       `}</style>
     </section>

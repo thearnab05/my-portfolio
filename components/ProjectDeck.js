@@ -309,11 +309,11 @@ export default function ProjectDeck() {
 
         @media (max-width: 768px) {
            .deck-container {
-              min-height: 400px;
+              min-height: 450px;
            }
            .cards-stack {
-              width: 200px;
-              height: 280px;
+              width: 260px;
+              height: 380px;
            }
            .project-card-wrapper {
               transform-origin: center 250%;

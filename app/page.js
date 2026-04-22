@@ -587,6 +587,38 @@ export default function Home() {
           font-size: 0.9rem;
           opacity: 0.5;
         }
+
+        @media (max-width: 768px) {
+          .selection-section, .projects-section {
+            padding: 60px 0;
+          }
+          .contact-section {
+            padding: 60px 1rem;
+          }
+          .selection-grid {
+            gap: 1.5rem;
+          }
+          .selection-card {
+            padding: 2.5rem 1rem;
+          }
+          .contact-card {
+            padding: 2rem 1rem;
+          }
+          .mission-card {
+            padding: 2.5rem 1.5rem;
+          }
+          .modal-actions {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .btn-primary, .btn-secondary {
+            width: 100%;
+          }
+          .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+          }
+        }
       `}</style>
     </main>
   );

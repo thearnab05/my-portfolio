@@ -59,11 +59,14 @@ a {
 .container {
   width: 100%;
   padding: 0 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 0 1.5rem;
+    width: 100%;
   }
 }
 
@@ -375,12 +378,7 @@ a {
 
 /* ================= MOBILE RESPONSIVE FIX ================= */
 
-/* CONTAINER */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
+/* CONTAINER CLEANUP - see line 59 for core container adjustments */
 
 /* RESPONSIVE TEXT */
 h1 {
