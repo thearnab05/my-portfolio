@@ -109,7 +109,7 @@ export default function Hero({ onBeginMission }) {
       <div className="bottom-left-corner animate-fade-in delay-3">
         <div className="avatar-n">AS--01</div>
         <div className="corner-text">
-          <span className="gray-text">LET'S BUILD SOMETHING</span>
+          <span className="gray-text">LET&apos;S BUILD SOMETHING</span>
           <br />
           <span className="pink-highlight">AMAZING</span> <span className="gray-text">TOGETHER</span>
         </div>

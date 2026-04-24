@@ -1,11 +1,39 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+function playWhooshSound() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioCtx) return;
+    
+    // Sweep sound imitating a UI whoosh/blip
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.2);
+    
+    gainNode.gain.setValueAtTime(0.0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.25);
+  } catch (e) {
+    console.warn("Audio error:", e);
+  }
+}
+
 export default function UnderConstructionModal({ isOpen, onClose }) {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line
       setRender(true);
       playWhooshSound();
     } else {
@@ -15,32 +43,7 @@ export default function UnderConstructionModal({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  const playWhooshSound = () => {
-    try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (!audioCtx) return;
-      
-      // Sweep sound imitating a UI whoosh/blip
-      const osc = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(250, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.2);
-      
-      gainNode.gain.setValueAtTime(0.0, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-      
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.25);
-    } catch (e) {
-      console.warn("Audio error:", e);
-    }
-  };
+
 
   if (!render) return null;
 

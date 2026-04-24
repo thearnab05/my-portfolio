@@ -2,12 +2,39 @@
 import { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 
+function playKickSound() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioCtx || audioCtx.state === 'suspended') return; // Might be suspended if no user interaction yet
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.15);
+
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.8, audioCtx.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.2);
+  } catch (e) {
+    // Audio playback failed (likely because user hasn't clicked anything yet)
+  }
+}
+
 export default function FloatingBadge() {
   const [isKicked, setIsKicked] = useState(false);
   const controls = useAnimation();
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   useEffect(() => {
+    // eslint-disable-next-line
     setWindowWidth(window.innerWidth);
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -30,6 +57,7 @@ export default function FloatingBadge() {
     
     // Ensure we start correctly on load
     if (window.scrollY > 100) {
+      // eslint-disable-next-line
       setIsKicked(true);
       controls.start("kickedFast"); // Jump straight there without sound/shake if page loaded low
     }
@@ -38,31 +66,7 @@ export default function FloatingBadge() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isKicked, controls]);
 
-  const playKickSound = () => {
-    try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (!audioCtx || audioCtx.state === 'suspended') return; // Might be suspended if no user interaction yet
-      
-      const osc = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
 
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.15);
-
-      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.8, audioCtx.currentTime + 0.02);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-
-      osc.start(audioCtx.currentTime);
-      osc.stop(audioCtx.currentTime + 0.2);
-    } catch (e) {
-      // Audio playback failed (likely because user hasn't clicked anything yet)
-    }
-  };
 
   const badgeWidth = 160;
 

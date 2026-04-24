@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function Navbar() {
 
             <div className="drawer-content">
               <div className="drawer-profile">
-                <img src="/cyberpunk-profile.jpg" alt="Player 456" className="profile-img" />
+                <Image src="/cyberpunk-profile.jpg" alt="Player 456" className="profile-img" width={140} height={140} />
                 <span className="player-id">SURAL 456</span>
               </div>
 

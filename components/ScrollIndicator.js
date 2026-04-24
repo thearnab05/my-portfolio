@@ -16,7 +16,7 @@ export default function ScrollIndicator() {
 
   return (
     <div className="scroll-indicator-container">
-      <span className="scroll-text">S U R A L'S  W O R L D</span>
+      <span className="scroll-text">S U R A L&apos;S  W O R L D</span>
       <div className="scroll-line">
         <motion.div
           className="scroll-dot"
